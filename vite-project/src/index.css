@@ -59,11 +59,26 @@ nav li:hover {
   }
 }
 .first-section {
-  @apply flex flex-col items-center gap-y-7 md:gap-y-4 lg:items-start text-center lg:text-left max-w-[450px];
+  @apply flex flex-col items-center md:justify-center gap-y-7 md:gap-y-4 lg:items-start text-center lg:text-left max-w-[450px];
 }
 .link-destination {
   @apply uppercase tracking-[3px] text-gray-400 font-light text-sm;
 }
 .heading-one {
   @apply text-5xl font-bold text-white;
+}
+.parameter-paragraph {
+  @apply uppercase text-gray-300 font-light text-sm tracking-wider;
+}
+.parameter-value-paragraph {
+  @apply text-xl text-white font-bold tracking-widest;
+}
+.section-grid {
+  @apply grid grid-cols-2 md:grid-cols-3 gap-x-8 w-full;
+}
+.btn-active {
+  @apply w-17 h-17 bg-white rounded-full border border-black text-3xl text-black font-medium cursor-pointer;
+}
+.btn-notActive {
+  @apply w-17 h-17 bg-black rounded-full border border-white text-3xl text-white font-medium cursor-pointer;
 }

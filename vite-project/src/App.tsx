@@ -10,7 +10,6 @@ import { DestinationPage } from "./pages/DestinationPage"
 import { CrewPage } from "./pages/CrewPage"
 import { TechnologyPage } from "./pages/TechnologyPage"
 import { NotFoundPage } from "./pages/404ErrorPage"
-import "./App.css"
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<MainLayout />}>

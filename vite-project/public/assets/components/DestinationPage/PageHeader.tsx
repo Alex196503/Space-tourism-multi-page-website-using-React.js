@@ -2,7 +2,7 @@ import type { PageHeaderProps } from "../../../types/types"
 
 export const PageHeader = ({ number, title }: PageHeaderProps) => {
   return (
-    <section className="mt-3 w-full flex flex-col gap-x-6 md:flex-row mb-10 md:items-start items-center">
+    <section className="mt-3 w-full flex flex-col gap-x-6 md:flex-row mb-10">
       <span className="text-[var(--color-star-dust)] font-bold text-3xl">
         {number}
       </span>
