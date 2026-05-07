@@ -1,19 +1,16 @@
 import { FirstContainerSection } from "../assets/components/DestinationPage/FirstContainerSection"
 import { SecondContainer } from "../assets/components/DestinationPage/SecondContainer"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import type { Destination } from "../types/types"
-import { fetchingData } from "../utils/HandlerFunction"
-export const DestinationPage = () => {
-  const [data, setData] = useState<Destination[] | null>([])
-  useEffect(() => {
-    const loadData = async () => {
-      let res = await fetchingData("destinations")
-      setData(res)
-    }
-    loadData()
-  }, [])
+export const DestinationPage = ({
+  destinations
+}: {
+  destinations: Destination[]
+}) => {
   const [planet, setPlanetChosen] = useState<string | null>("Mars")
-  let planetFound = data?.find((planeta) => planeta.name === planet)
+  let planetFound = destinations?.find(
+    (planeta) => planeta.name === planet
+  )
   const setPlanet = (name: string) => {
     setPlanetChosen(name)
   }
@@ -23,7 +20,7 @@ export const DestinationPage = () => {
       <SecondContainer
         planetFound={planetFound}
         onSetPlanetChosen={setPlanet}
-        data={data}
+        data={destinations}
       />
     </main>
   )

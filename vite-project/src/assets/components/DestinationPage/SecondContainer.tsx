@@ -14,8 +14,8 @@ export const SecondContainer = ({
 
   return (
     <article className="px-5 md:py-12 mt-12 flex flex-col items-center lg:items-start w-full">
-      <ul className="flex items-center gap-x-10">
-        {planets.map((planet) => {
+      <ul className="grid grid-cols-3 gap-4 sm:grid-cols-4 md:grid-cols-6 lg:flex lg:items-center lg:flex-wrap lg:gap-x-10">
+        {planets.map((planet, _index) => {
           return (
             <li key={planet}>
               <button
@@ -24,7 +24,7 @@ export const SecondContainer = ({
                     onSetPlanetChosen(planet)
                   }
                 }}
-                className={`link-destination ${planetFound?.name === planet ? "before:bg-white before:w-full before:h-[3px] before:content-[''] before:absolute before:left-0 before:bottom-[-30px] before:transform before:-translate-y-1/2" : ""}`}
+                className={`link-destination ${planetFound?.name === planet ? "before:bg-white before:w-full before:h-[3px] before:content-[''] before:absolute before:left-0 before:bottom-[-10px] before:transform before:-translate-y-1/2" : ""}`}
               >
                 {planet}
               </button>

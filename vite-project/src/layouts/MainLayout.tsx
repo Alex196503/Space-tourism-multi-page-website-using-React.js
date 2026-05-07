@@ -2,6 +2,8 @@ import { Outlet } from "react-router-dom"
 import { Header } from "../assets/components/HomePage/Header"
 import { useState } from "react"
 import { useLocation } from "react-router-dom"
+import { ToastContainer } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
 export const MainLayout = () => {
   const location = useLocation()
   const [isMobileMenuActive, setMobileMenuActive] = useState(false)
@@ -30,6 +32,7 @@ export const MainLayout = () => {
           context={{ isMobileMenuActive, setMobileMenuActive }}
         />
       </div>
+      <ToastContainer />
     </>
   )
 }

@@ -16,15 +16,16 @@ export const VisualShowcase = ({
       window.removeEventListener("resize", resizeHandler)
     }
   }, [])
+  let imageSrcDefault = () => {
+    return isMobileScreenActive
+      ? techFound?.images?.landscape
+      : techFound?.images?.portrait
+  }
   return (
     <div className="lg:w-1/2 flex justify-end">
       <div className="w-full h-[310px] md:h-[500px] lg:h-[450px] lg:w-[475px] object-cover bg-cover md:bg-contain bg-no-repeat bg-center">
         <img
-          src={
-            isMobileScreenActive
-              ? techFound?.images?.landscape
-              : techFound?.images?.portrait
-          }
+          src={imageSrcDefault() || techFound?.urlImage}
           className="w-full h-full"
           alt="Image with our tech"
         />

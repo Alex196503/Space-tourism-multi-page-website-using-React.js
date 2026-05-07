@@ -1,22 +1,15 @@
 import { SecondContainerHero } from "../assets/components/CrewPage/SecondContainerHero"
 import { FirstContainerHero } from "../assets/components/CrewPage/FirstContainerHero"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { type Crew } from "../types/types"
-import { fetchingData } from "../utils/HandlerFunction"
-export const CrewPage = () => {
-  const [data, setData] = useState<Crew[] | null>([])
-  useEffect(() => {
-    fetchingData("crew")
-      .then((res) => setData(res))
-      .catch((error) => console.log(error))
-  }, [])
+export const CrewPage = ({ crews }: { crews: Crew[] }) => {
   const [memberChosen, setMemberChosen] = useState<string | null>(
     "Anousheh Ansari"
   )
   const setMember = (name: string) => {
     setMemberChosen(name)
   }
-  const memberFound = data?.find(
+  const memberFound = crews?.find(
     (member) => member.name === memberChosen
   )
   return (
@@ -24,7 +17,7 @@ export const CrewPage = () => {
       <FirstContainerHero
         memberFound={memberFound}
         setMember={setMember}
-        data={data}
+        data={crews}
       />
       <SecondContainerHero memberFound={memberFound} />
     </main>

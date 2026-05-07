@@ -44,7 +44,8 @@ nav a.active::after,
   transition: width 0.3s ease;
 }
 .link-destination:hover::after {
-  left: 0;
+  left: 0px;
+  bottom: -10px;
 }
 .group:hover::after {
   bottom: -5px;

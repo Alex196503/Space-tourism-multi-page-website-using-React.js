@@ -5,7 +5,8 @@ export const InputText = ({
   name,
   placeholder,
   value,
-  handleChange
+  handleChange,
+  maxLength
 }: TextInputProps) => {
   return (
     <div className="form-container">
@@ -21,6 +22,7 @@ export const InputText = ({
         required
         value={value}
         onChange={handleChange}
+        maxLength={maxLength || undefined}
       />
     </div>
   )

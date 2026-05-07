@@ -1,4 +1,9 @@
-import type { JSONResponse } from "../types/types"
+import type {
+  Crew,
+  Destination,
+  JSONResponse,
+  Technology
+} from "../types/types"
 // Handler function used with generics in typescript
 export const fetchingData = async <T extends keyof JSONResponse>(
   value: T
@@ -20,4 +25,15 @@ export const getItem = <T>(item: string): T[] => {
   if (saved) {
     return JSON.parse(saved)
   } else return []
+}
+//Function used to find if that name introduced by user already exists in the localStorage or in the json files
+export const isNameFound = (
+  type: Destination[] | Crew[] | Technology[],
+  value: string
+) => {
+  let nameFound = type.find(
+    (destination) =>
+      destination.name.toLowerCase() === value.toLowerCase()
+  )
+  return nameFound
 }

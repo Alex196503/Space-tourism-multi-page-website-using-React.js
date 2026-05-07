@@ -105,6 +105,7 @@ export interface TextInputProps {
       Element
     >
   ) => void
+  maxLength?: number
 }
 export interface TextareaProps extends TextInputProps {
   rows: number

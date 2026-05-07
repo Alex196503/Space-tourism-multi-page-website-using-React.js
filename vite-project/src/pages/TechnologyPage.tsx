@@ -1,19 +1,13 @@
 import { PageHeader } from "../assets/components/DestinationPage/PageHeader"
 import { StageContext } from "../assets/components/TechnologyPage/StageContext"
 import { VisualShowcase } from "../assets/components/TechnologyPage/VisualShowcase"
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import type { Technology } from "../types/types"
-import { fetchingData } from "../utils/HandlerFunction"
-export const TechnologyPage = () => {
-  let [data, setData] = useState<Technology[] | null>([])
-  useEffect(() => {
-    fetchingData("technology")
-      .then((res) => setData(res))
-      .catch((error) => console.log(error))
-  }, [])
-  const technologies: Technology[] | undefined = data?.map(
-    (tech) => tech
-  )
+export const TechnologyPage = ({
+  technologies
+}: {
+  technologies: Technology[]
+}) => {
   const [techChosen, setTech] = useState<string>("Launch vehicle")
   const changeSet = (name: string) => {
     setTech(name)
@@ -29,7 +23,7 @@ export const TechnologyPage = () => {
         <StageContext
           onSetTech={changeSet}
           techFound={techFound}
-          data={data}
+          data={technologies}
         />
         <VisualShowcase techFound={techFound} />
       </div>

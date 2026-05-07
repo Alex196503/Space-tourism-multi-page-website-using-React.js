@@ -10,7 +10,8 @@ import { v4 as uuidv4 } from "uuid"
 import { InputText } from "./inputs/InputText"
 import { InputNumber } from "./inputs/InputNumber"
 import { TextareaInput } from "./inputs/TextareaInput"
-
+import { toast } from "react-toastify"
+import { isNameFound } from "../../../utils/HandlerFunction"
 export const CreateForm = ({
   type,
   destinations,
@@ -52,7 +53,13 @@ export const CreateForm = ({
   const handleForm = (e: React.FormEvent) => {
     e.preventDefault()
     if (formData.name.trim() === "") {
-      console.log("Name is required")
+      toast.error("Name is required!")
+      return
+    }
+    if (type === "planet" && formData.name.length >= 12) {
+      toast.error(
+        "Please introduce a name with less than 12 characters!"
+      )
       return
     }
     if (
@@ -60,7 +67,25 @@ export const CreateForm = ({
       "description" in formData &&
       formData.description.trim() === ""
     ) {
-      console.log("Description is required")
+      toast.error("Description is required")
+      return
+    }
+    if (
+      type === "planet" &&
+      isNameFound(destinations, formData.name)
+    ) {
+      toast.error("Name already exists!")
+      return
+    }
+    if (type === "member" && isNameFound(members, formData.name)) {
+      toast.error("Name already exists!")
+      return
+    }
+    if (
+      type === "technology" &&
+      isNameFound(technologies, formData.name)
+    ) {
+      toast.error("Name already exists!")
       return
     }
     if (type === "planet") {
@@ -97,6 +122,7 @@ export const CreateForm = ({
         urlImage: ""
       })
     }
+    toast.success(`The ${type} has been succesfully created!`)
   }
   return (
     <>
@@ -112,6 +138,7 @@ export const CreateForm = ({
           placeholder="Introduce the name..."
           value={formData.name}
           handleChange={handleChange}
+          maxLength={12}
         >
           Name
         </InputText>

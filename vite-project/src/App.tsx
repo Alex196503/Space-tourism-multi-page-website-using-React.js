@@ -13,20 +13,56 @@ import {
   type Destination,
   type Crew
 } from "./types/types"
-import { getItem } from "./utils/HandlerFunction"
+import { fetchingData, getItem } from "./utils/HandlerFunction"
 export const App = () => {
-  let [destinations, setDestinations] = useState<Destination[]>(
-    getItem("destinations")
+  const [destinations, setDestination] = useState<Destination[]>(
+    getItem("destinations") || []
   )
-  let [technology, setTechnologies] = useState<Technology[]>(
-    getItem("technologies")
+  const [technologies, setTechnology] = useState<Technology[]>(
+    getItem("technologies") || []
   )
-  let [members, setMembers] = useState<Crew[]>(getItem("members"))
+  const [members, setMember] = useState<Crew[]>(
+    getItem("members") || []
+  )
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        let res = await fetchingData("destinations")
+        let res2 = await fetchingData("crew")
+        let res3 = await fetchingData("technology")
+        setDestination((prev) => {
+          if (!res) return prev
+          let jsonData = res.filter((destination: Destination) =>
+            prev.every((item) => item.name !== destination.name)
+          )
+          return [...prev, ...jsonData]
+        })
+        setTechnology((prev) => {
+          if (!res3) return prev
+          let jsonData = res3.filter((tech: Technology) =>
+            prev.every((item) => item.name !== tech.name)
+          )
+          return [...prev, ...jsonData]
+        })
+        setMember((prev) => {
+          if (!res2) return prev
+          let jsonData = res2.filter((member: Crew) =>
+            prev.every((item) => item.name !== member.name)
+          )
+          return [...prev, ...jsonData]
+        })
+      } catch (err) {
+        console.error(`Something bad happened! ${err}`)
+      }
+    }
+    loadData()
+  }, [])
+
   useEffect(() => {
     localStorage.setItem("destinations", JSON.stringify(destinations))
-    localStorage.setItem("technologies", JSON.stringify(technology))
+    localStorage.setItem("technologies", JSON.stringify(technologies))
     localStorage.setItem("members", JSON.stringify(members))
-  }, [destinations, technology, members])
+  }, [destinations, technologies, members])
   return (
     <>
       <BrowserRouter>
@@ -35,20 +71,28 @@ export const App = () => {
             <Route index element={<HomePage />} />
             <Route
               path="/destination"
-              element={<DestinationPage />}
+              element={
+                <DestinationPage destinations={destinations} />
+              }
             />
-            <Route path="/crew" element={<CrewPage />} />
-            <Route path="/tech" element={<TechnologyPage />} />
+            <Route
+              path="/crew"
+              element={<CrewPage crews={members} />}
+            />
+            <Route
+              path="/tech"
+              element={<TechnologyPage technologies={technologies} />}
+            />
             <Route
               path="/create"
               element={
                 <CreatePage
                   destinations={destinations}
-                  setDestinations={setDestinations}
-                  technologies={technology}
-                  setTechnologies={setTechnologies}
+                  setDestinations={setDestination}
+                  technologies={technologies}
+                  setTechnologies={setTechnology}
                   members={members}
-                  setMembers={setMembers}
+                  setMembers={setMember}
                 />
               }
             />
