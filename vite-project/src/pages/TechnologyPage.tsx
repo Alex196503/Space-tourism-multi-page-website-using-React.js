@@ -4,7 +4,6 @@ import { VisualShowcase } from "../assets/components/TechnologyPage/VisualShowca
 import { useState, useEffect } from "react"
 import type { Technology } from "../types/types"
 import { fetchingData } from "../utils/HandlerFunction"
-
 export const TechnologyPage = () => {
   let [data, setData] = useState<Technology[] | null>([])
   useEffect(() => {

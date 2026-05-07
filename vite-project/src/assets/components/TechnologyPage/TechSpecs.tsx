@@ -1,4 +1,5 @@
 import type { SecondContainerTechProps } from "../../../types/types"
+import { UserActions } from "../HomePage/UserActions"
 
 export const TechSpecs = ({
   techFound
@@ -13,5 +14,6 @@ export const TechSpecs = ({
     <p className="mt-3 text-gray-300 text-xl">
       {techFound?.description}
     </p>
+    <UserActions element="technology" />
   </div>
 )

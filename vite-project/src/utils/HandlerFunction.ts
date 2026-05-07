@@ -14,3 +14,10 @@ export const fetchingData = async <T extends keyof JSONResponse>(
     throw new Error(`Something bad happened! ${err}`)
   }
 }
+//Handler function used to get the items from the local storage
+export const getItem = <T>(item: string): T[] => {
+  let saved = localStorage.getItem(item)
+  if (saved) {
+    return JSON.parse(saved)
+  } else return []
+}

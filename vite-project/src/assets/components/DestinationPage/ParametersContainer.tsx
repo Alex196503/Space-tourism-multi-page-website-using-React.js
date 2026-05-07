@@ -9,14 +9,10 @@ export const ParametersContainer = ({
   return (
     <>
       <ParametersContainerLabel
-        labels={["avg distance", "est travel time", "asfasf"]}
+        labels={["avg distance", "est travel time"]}
       />
       <ParametersContainerValues
-        values={[
-          planetFound?.distance,
-          planetFound?.travel,
-          "asfasf"
-        ]}
+        values={[planetFound?.distance, planetFound?.travel]}
       />
     </>
   )

@@ -1,6 +1,8 @@
 import type { PlanetProps2 } from "../../../types/types"
 import { HeroSection } from "./HeroSection"
 import { ParametersContainer } from "./ParametersContainer"
+import { UserActions } from "../HomePage/UserActions"
+
 export const SecondContainer = ({
   data,
   planetFound,
@@ -31,9 +33,10 @@ export const SecondContainer = ({
         })}
       </ul>
       <HeroSection planetFound={planetFound} />
-      <div className="flex flex-col items-center md:items-start justify-center gap-y-3 w-full max-w-[600px] border-t border-[#383B4B] mt-8 pt-6">
+      <div className="flex flex-col items-center md:items-start justify-center gap-y-3 w-full max-w-[600px] mt-3 pt-3">
         <ParametersContainer planetFound={planetFound} />
       </div>
+      <UserActions element="planet" />
     </article>
   )
 }

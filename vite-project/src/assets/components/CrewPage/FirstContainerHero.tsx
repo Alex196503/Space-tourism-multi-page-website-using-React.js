@@ -2,6 +2,8 @@ import { PageHeader } from "../DestinationPage/PageHeader"
 import { InformationContainer } from "./InformationContainer"
 import { ElipsisContainer } from "./ElipsisContainer"
 import type { FirstContainerHeroProps } from "../../../types/types"
+import { UserActions } from "../HomePage/UserActions"
+
 export const FirstContainerHero = ({
   memberFound,
   setMember,
@@ -16,6 +18,7 @@ export const FirstContainerHero = ({
         data={data}
         memberFound={memberFound}
       />
+      <UserActions element="member" />
     </section>
   )
 }

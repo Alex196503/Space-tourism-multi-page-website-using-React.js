@@ -1,5 +1,6 @@
 import { type SecondContainerTechProps } from "../../../types/types"
 import { useEffect, useState } from "react"
+
 export const VisualShowcase = ({
   techFound
 }: SecondContainerTechProps) => {
@@ -21,8 +22,8 @@ export const VisualShowcase = ({
         <img
           src={
             isMobileScreenActive
-              ? techFound?.images.landscape
-              : techFound?.images.portrait
+              ? techFound?.images?.landscape
+              : techFound?.images?.portrait
           }
           className="w-full h-full"
           alt="Image with our tech"

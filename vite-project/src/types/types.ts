@@ -16,32 +16,37 @@ export interface PageHeaderProps {
   title: string
 }
 export type Destination = {
-  id: string
+  id?: string
   name: string
-  images: {
-    png: string
-    webp: string
+  images?: {
+    png?: string
+    webp?: string
   }
   description: string
   distance: string
   travel: string
+  urlImage?: string
 }
 export type Crew = {
   name: string
-  images: {
-    png: string
-    webp: string
+  images?: {
+    png?: string
+    webp?: string
   }
   role: string
   bio: string
+  id?: string
+  urlImage?: string
 }
 export type Technology = {
   name: string
-  images: {
+  images?: {
     portrait: string
     landscape: string
   }
   description: string
+  id?: string
+  urlImage?: string
 }
 export type JSONResponse = {
   crew: Crew[]
@@ -72,4 +77,35 @@ export interface SecondContainerTechProps {
 export interface FirstContainerTechProps extends SecondContainerTechProps {
   onSetTech: (arg0: string) => void
   data: Technology[] | null
+}
+export interface UploadInputProps {
+  required: boolean
+  url: string | undefined
+  onChange: (arg0: any) => void
+}
+export interface CreatePageProps {
+  destinations: Destination[]
+  setDestinations: React.Dispatch<React.SetStateAction<Destination[]>>
+  technologies: Technology[]
+  setTechnologies: React.Dispatch<React.SetStateAction<Technology[]>>
+  members: Crew[]
+  setMembers: React.Dispatch<React.SetStateAction<Crew[]>>
+}
+export interface CreateFormProps extends CreatePageProps {
+  type: string | null
+}
+export interface TextInputProps {
+  children: string
+  name: string
+  placeholder?: string
+  value: string
+  handleChange: (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement,
+      Element
+    >
+  ) => void
+}
+export interface TextareaProps extends TextInputProps {
+  rows: number
 }

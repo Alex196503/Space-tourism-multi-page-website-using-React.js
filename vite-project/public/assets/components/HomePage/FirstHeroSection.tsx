@@ -1,4 +1,4 @@
-import type { MobileMenuProps } from "../../../types/types"
+import type { MobileMenuProps } from "../../../../src/types/types"
 import { useEffect } from "react"
 export const FirstHeroSection = ({
   setMobileMenuActive,
