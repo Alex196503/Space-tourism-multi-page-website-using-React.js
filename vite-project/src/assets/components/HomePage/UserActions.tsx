@@ -1,6 +1,14 @@
 import { Link } from "react-router-dom"
 
-export const UserActions = ({ element }: { element: string }) => {
+export const UserActions = ({
+  element,
+  onDelete,
+  name
+}: {
+  element: string
+  onDelete: (name: string | undefined) => void
+  name: string | undefined
+}) => {
   const URLHandler = (element: string, path: string) => {
     switch (element) {
       case "planet":
@@ -25,12 +33,15 @@ export const UserActions = ({ element }: { element: string }) => {
       >
         Edit {element}
       </Link>
-      <Link
-        to={URLHandler(element, "/delete") as string}
+      <button
+        type="button"
+        onClick={() => {
+          onDelete(name)
+        }}
         className="bg-rose-500 hover:bg-rose-600 focus:outline-2 focus:outline-offset-2 focus:outline-rose-500 active:bg-rose-700 btn-props"
       >
         Delete {element}
-      </Link>
+      </button>
     </div>
   )
 }

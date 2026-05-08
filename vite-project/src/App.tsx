@@ -1,5 +1,4 @@
-import { Routes, Route, BrowserRouter } from "react-router-dom"
-
+import { Routes, Route, useNavigate } from "react-router-dom"
 import { HomePage } from "./pages/HomePage"
 import { MainLayout } from "./layouts/MainLayout"
 import { DestinationPage } from "./pages/DestinationPage"
@@ -8,12 +7,15 @@ import { TechnologyPage } from "./pages/TechnologyPage"
 import { NotFoundPage } from "./pages/404ErrorPage"
 import { CreatePage } from "./pages/CreatePage"
 import { useEffect, useState } from "react"
+
 import {
   type Technology,
   type Destination,
   type Crew
 } from "./types/types"
-import { fetchingData, getItem } from "./utils/HandlerFunction"
+import { fetchingData, getItem } from "./utils/HandlerFunctions"
+import { deleteElement } from "./utils/DeleteHandlerFunction"
+
 export const App = () => {
   const [destinations, setDestination] = useState<Destination[]>(
     getItem("destinations") || []
@@ -24,6 +26,38 @@ export const App = () => {
   const [members, setMember] = useState<Crew[]>(
     getItem("members") || []
   )
+  let navigate = useNavigate()
+  // calling the delete handler function for every element: destination, member, tech
+  const deleteDestination = (nameFromBtn: string | undefined) => {
+    deleteElement({
+      name: nameFromBtn,
+      type: "planet",
+      data: destinations,
+      setData: setDestination,
+      navigate: navigate,
+      basePath: "destination"
+    })
+  }
+  const deleteMember = (nameFromBtn: string | undefined) => {
+    deleteElement({
+      name: nameFromBtn,
+      type: "member",
+      data: members,
+      setData: setMember,
+      navigate: navigate,
+      basePath: "crew"
+    })
+  }
+  const deleteTech = (nameFromBtn: string | undefined) => {
+    deleteElement({
+      name: nameFromBtn,
+      type: "technology",
+      data: technologies,
+      setData: setTechnology,
+      navigate: navigate,
+      basePath: "tech"
+    })
+  }
   useEffect(() => {
     const loadData = async () => {
       try {
@@ -65,41 +99,49 @@ export const App = () => {
   }, [destinations, technologies, members])
   return (
     <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<MainLayout />}>
-            <Route index element={<HomePage />} />
-            <Route
-              path="/destination"
-              element={
-                <DestinationPage destinations={destinations} />
-              }
-            />
-            <Route
-              path="/crew"
-              element={<CrewPage crews={members} />}
-            />
-            <Route
-              path="/tech"
-              element={<TechnologyPage technologies={technologies} />}
-            />
-            <Route
-              path="/create"
-              element={
-                <CreatePage
-                  destinations={destinations}
-                  setDestinations={setDestination}
-                  technologies={technologies}
-                  setTechnologies={setTechnology}
-                  members={members}
-                  setMembers={setMember}
-                />
-              }
-            />
-            <Route path="*" element={<NotFoundPage />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+      <Routes>
+        <Route path="/" element={<MainLayout />}>
+          <Route index element={<HomePage />} />
+          <Route
+            path="/destination"
+            element={
+              <DestinationPage
+                destinations={destinations}
+                deleteDestination={deleteDestination}
+              />
+            }
+          />
+          <Route
+            path="/crew"
+            element={
+              <CrewPage crews={members} deleteMember={deleteMember} />
+            }
+          />
+          <Route
+            path="/tech"
+            element={
+              <TechnologyPage
+                technologies={technologies}
+                deleteTech={deleteTech}
+              />
+            }
+          />
+          <Route
+            path="/create"
+            element={
+              <CreatePage
+                destinations={destinations}
+                setDestinations={setDestination}
+                technologies={technologies}
+                setTechnologies={setTechnology}
+                members={members}
+                setMembers={setMember}
+              />
+            }
+          />
+          <Route path="*" element={<NotFoundPage />} />
+        </Route>
+      </Routes>
     </>
   )
 }

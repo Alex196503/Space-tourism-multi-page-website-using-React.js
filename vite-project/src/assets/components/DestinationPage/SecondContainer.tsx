@@ -6,7 +6,8 @@ import { UserActions } from "../HomePage/UserActions"
 export const SecondContainer = ({
   data,
   planetFound,
-  onSetPlanetChosen
+  onSetPlanetChosen,
+  deleteDestination
 }: PlanetProps2) => {
   let planets = data
     ? data.map((destination) => destination.name)
@@ -36,7 +37,11 @@ export const SecondContainer = ({
       <div className="flex flex-col items-center md:items-start justify-center gap-y-3 w-full max-w-[600px] mt-3 pt-3">
         <ParametersContainer planetFound={planetFound} />
       </div>
-      <UserActions element="planet" />
+      <UserActions
+        element="planet"
+        name={planetFound?.name}
+        onDelete={deleteDestination}
+      />
     </article>
   )
 }

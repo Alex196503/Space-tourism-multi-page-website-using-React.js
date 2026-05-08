@@ -1,11 +1,12 @@
 import { StepIndicator } from "./StepIndicator"
 import { TechSpecs } from "./TechSpecs"
-import { type FirstContainerTechProps } from "../../../types/types"
+import { type FullTechProps } from "../../../types/types"
 export const StageContext = ({
   onSetTech,
   techFound,
-  data
-}: FirstContainerTechProps) => {
+  data,
+  deleteTech
+}: FullTechProps) => {
   return (
     <section className="flex flex-col md:flex-row items-center md:items-start lg:w-1/2">
       <StepIndicator
@@ -13,7 +14,7 @@ export const StageContext = ({
         techFound={techFound}
         data={data}
       />
-      <TechSpecs techFound={techFound} />
+      <TechSpecs techFound={techFound} deleteTech={deleteTech} />
     </section>
   )
 }

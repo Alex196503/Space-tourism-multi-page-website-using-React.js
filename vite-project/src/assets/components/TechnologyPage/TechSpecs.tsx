@@ -1,9 +1,10 @@
-import type { SecondContainerTechProps } from "../../../types/types"
+import { type ContainerTechPropsWithDelete } from "../../../types/types"
 import { UserActions } from "../HomePage/UserActions"
 
 export const TechSpecs = ({
-  techFound
-}: SecondContainerTechProps) => (
+  techFound,
+  deleteTech
+}: ContainerTechPropsWithDelete) => (
   <div className="flex flex-col gap-y-4 w-full text-center md:text-left py-7 md:py-4">
     <h1 className="text-gray-300 text-sm uppercase tracking-[1.5px]">
       The terminology...
@@ -14,6 +15,10 @@ export const TechSpecs = ({
     <p className="mt-3 text-gray-300 text-xl">
       {techFound?.description}
     </p>
-    <UserActions element="technology" />
+    <UserActions
+      onDelete={deleteTech}
+      name={techFound?.name}
+      element="technology"
+    />
   </div>
 )

@@ -11,7 +11,7 @@ import { InputText } from "./inputs/InputText"
 import { InputNumber } from "./inputs/InputNumber"
 import { TextareaInput } from "./inputs/TextareaInput"
 import { toast } from "react-toastify"
-import { isNameFound } from "../../../utils/HandlerFunction"
+import { isNameFound } from "../../../utils/HandlerFunctions"
 export const CreateForm = ({
   type,
   destinations,

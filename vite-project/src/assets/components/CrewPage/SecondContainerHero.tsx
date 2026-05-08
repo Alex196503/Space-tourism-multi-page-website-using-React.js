@@ -2,6 +2,7 @@ import { type SecondContainerHeroProps } from "../../../types/types"
 export const SecondContainerHero = ({
   memberFound
 }: SecondContainerHeroProps) => {
+  if (!memberFound) return
   return (
     <div className="w-full md:px-10 md:ml-10 pb-0">
       <img
