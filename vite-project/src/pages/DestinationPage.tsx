@@ -11,6 +11,10 @@ export const DestinationPage = ({
   let planetFound = destinations?.find(
     (destionation) => destionation.name === planetFromUrl
   )
+  //fallback: in case the user edits the name of the default one - Moon
+  if (!planetFound && destinations && destinations.length > 0) {
+    planetFound = destinations[0]
+  }
   const setPlanet = (name: string) => {
     setSearchParams({ name: name })
   }

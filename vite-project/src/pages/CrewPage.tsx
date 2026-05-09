@@ -5,9 +5,13 @@ import { useSearchParams } from "react-router-dom"
 export const CrewPage = ({ crews, deleteMember }: CrewPageProps) => {
   const [searchParams, setSearchParams] = useSearchParams()
   const memberFromUrl = searchParams.get("name") || "Anousheh Ansari"
-  const memberFound = crews.find(
+  let memberFound = crews.find(
     (member) => member.name === memberFromUrl
   )
+  //fallback: in case the user edits the name of the default one - Anousheh Ansari
+  if (!memberFound && crews && crews.length > 0) {
+    memberFound = crews[0]
+  }
   const setMember = (name: string) => {
     setSearchParams({ name: name })
   }

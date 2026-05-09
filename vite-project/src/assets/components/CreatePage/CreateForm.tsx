@@ -9,9 +9,11 @@ import { useState, useEffect } from "react"
 import { v4 as uuidv4 } from "uuid"
 import { InputText } from "./inputs/InputText"
 import { InputNumber } from "./inputs/InputNumber"
-import { TextareaInput } from "./inputs/TextareaInput"
 import { toast } from "react-toastify"
+import { TextareaInput } from "./inputs/TextareaInput"
 import { isNameFound } from "../../../utils/HandlerFunctions"
+import { SubmitBtn } from "./inputs/SubmitBtn"
+import { validateForm } from "../../../utils/FormValidationFunction"
 export const CreateForm = ({
   type,
   destinations,
@@ -50,44 +52,19 @@ export const CreateForm = ({
       [e.target.name]: e.target.value
     })
   }
+  
   const handleForm = (e: React.FormEvent) => {
     e.preventDefault()
-    if (formData.name.trim() === "") {
-      toast.error("Name is required!")
-      return
-    }
-    if (type === "planet" && formData.name.length >= 12) {
-      toast.error(
-        "Please introduce a name with less than 12 characters!"
-      )
-      return
-    }
-    if (
-      type === "planet" &&
-      "description" in formData &&
-      formData.description.trim() === ""
-    ) {
-      toast.error("Description is required")
-      return
-    }
-    if (
-      type === "planet" &&
-      isNameFound(destinations, formData.name)
-    ) {
-      toast.error("Name already exists!")
-      return
-    }
-    if (type === "member" && isNameFound(members, formData.name)) {
-      toast.error("Name already exists!")
-      return
-    }
-    if (
-      type === "technology" &&
-      isNameFound(technologies, formData.name)
-    ) {
-      toast.error("Name already exists!")
-      return
-    }
+    
+    let isValid = validateForm(
+      formData,
+      type,
+      isNameFound,
+      destinations,
+      members,
+      technologies
+    )
+    if (!isValid) return
     if (type === "planet") {
       const newFormData = { ...formData, id: uuidv4() } as Destination
       setDestinations([newFormData, ...destinations])
@@ -126,13 +103,8 @@ export const CreateForm = ({
   }
   return (
     <>
-      <form
-        onSubmit={handleForm}
-        className="w-full flex flex-col py-3 px-4 mt-4 gap-y-1"
-      >
-        <h1 className="text-2xl text-gray-900 py-3 font-bold text-center">
-          Create a new {type}
-        </h1>
+      <form onSubmit={handleForm} className="form-control">
+        <h1 className="heading">Create a new {type}</h1>
         <InputText
           name="name"
           placeholder="Introduce the name..."
@@ -201,12 +173,7 @@ export const CreateForm = ({
           onChange={handleChange}
           url={formData.urlImage}
         />
-        <button
-          type="submit"
-          className="bg-blue-500 mx-auto max-w-[100px] cursor-pointer rounded-sm hover:bg-blue-700 text-white font-bold py-2 px-4"
-        >
-          Submit
-        </button>
+        <SubmitBtn> Submit </SubmitBtn>
       </form>
     </>
   )

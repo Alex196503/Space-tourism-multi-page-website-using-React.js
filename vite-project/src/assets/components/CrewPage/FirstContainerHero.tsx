@@ -19,7 +19,12 @@ export const FirstContainerHero = ({
         data={data}
         memberFound={memberFound}
       />
-      <UserActions onDelete={deleteMember} element="member" name={memberFound?.name} />
+      <UserActions
+        onDelete={deleteMember}
+        element="member"
+        name={memberFound?.name}
+        
+      />
     </section>
   )
 }

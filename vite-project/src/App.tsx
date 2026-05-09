@@ -7,7 +7,7 @@ import { TechnologyPage } from "./pages/TechnologyPage"
 import { NotFoundPage } from "./pages/404ErrorPage"
 import { CreatePage } from "./pages/CreatePage"
 import { useEffect, useState } from "react"
-
+import { EditPage } from "./pages/EditPage"
 import {
   type Technology,
   type Destination,
@@ -61,30 +61,21 @@ export const App = () => {
   useEffect(() => {
     const loadData = async () => {
       try {
+        const hasDestinations = getItem("destinations")?.length > 0
+        const hasCrew = getItem("members")?.length > 0
+        const hasTech = getItem("technologies")?.length > 0
         let res = await fetchingData("destinations")
         let res2 = await fetchingData("crew")
         let res3 = await fetchingData("technology")
-        setDestination((prev) => {
-          if (!res) return prev
-          let jsonData = res.filter((destination: Destination) =>
-            prev.every((item) => item.name !== destination.name)
-          )
-          return [...prev, ...jsonData]
-        })
-        setTechnology((prev) => {
-          if (!res3) return prev
-          let jsonData = res3.filter((tech: Technology) =>
-            prev.every((item) => item.name !== tech.name)
-          )
-          return [...prev, ...jsonData]
-        })
-        setMember((prev) => {
-          if (!res2) return prev
-          let jsonData = res2.filter((member: Crew) =>
-            prev.every((item) => item.name !== member.name)
-          )
-          return [...prev, ...jsonData]
-        })
+        if (!hasDestinations) {
+          setDestination(res || [])
+        }
+        if (!hasCrew) {
+          setMember(res2 || [])
+        }
+        if (!hasTech) {
+          setTechnology(res3 || [])
+        }
       } catch (err) {
         console.error(`Something bad happened! ${err}`)
       }
@@ -130,6 +121,19 @@ export const App = () => {
             path="/create"
             element={
               <CreatePage
+                destinations={destinations}
+                setDestinations={setDestination}
+                technologies={technologies}
+                setTechnologies={setTechnology}
+                members={members}
+                setMembers={setMember}
+              />
+            }
+          />
+          <Route
+            path="/edit/:name"
+            element={
+              <EditPage
                 destinations={destinations}
                 setDestinations={setDestination}
                 technologies={technologies}

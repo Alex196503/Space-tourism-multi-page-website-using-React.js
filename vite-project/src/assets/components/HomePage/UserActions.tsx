@@ -1,14 +1,11 @@
 import { Link } from "react-router-dom"
+import type { UserActionProps } from "../../../types/types"
 
 export const UserActions = ({
   element,
   onDelete,
   name
-}: {
-  element: string
-  onDelete: (name: string | undefined) => void
-  name: string | undefined
-}) => {
+}: UserActionProps) => {
   const URLHandler = (element: string, path: string) => {
     switch (element) {
       case "planet":
@@ -28,7 +25,12 @@ export const UserActions = ({
         Create a new {element}
       </Link>
       <Link
-        to={URLHandler(element, "/edit") as string}
+        to={
+          URLHandler(
+            element,
+            `/edit/${encodeURIComponent(name || "")}`
+          ) as string
+        }
         className="bg-violet-500 hover:bg-violet-600 focus:outline-2 focus:outline-offset-2 focus:outline-violet-500 active:bg-violet-700 btn-props"
       >
         Edit {element}

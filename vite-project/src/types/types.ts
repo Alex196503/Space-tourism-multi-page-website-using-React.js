@@ -1,54 +1,7 @@
-import { type SetStateAction } from "react"
 import type { NavigateFunction } from "react-router-dom"
-export interface NavbarList {
-  number: string
-  title: string
-  url: string
-}
-export interface NavbarListMobile extends NavbarList {
-  className: string
-}
-export type MobileMenuProps = {
-  setMobileMenuActive: React.Dispatch<SetStateAction<boolean>>
-  isMobileMenuActive: boolean
-}
-export interface PageHeaderProps {
-  number: string
-  title: string
-}
-export type Destination = {
-  id?: string
-  name: string
-  images?: {
-    png?: string
-    webp?: string
-  }
-  description: string
-  distance: string
-  travel: string
-  urlImage?: string
-}
-export type Crew = {
-  name: string
-  images?: {
-    png?: string
-    webp?: string
-  }
-  role: string
-  bio: string
-  id?: string
-  urlImage?: string
-}
-export type Technology = {
-  name: string
-  images?: {
-    portrait: string
-    landscape: string
-  }
-  description: string
-  id?: string
-  urlImage?: string
-}
+export * from "../types/uiTypes"
+export * from "../types/entities"
+import type { Crew, Technology, Destination } from "../types/entities"
 export type JSONResponse = {
   crew: Crew[]
   destinations: Destination[]
@@ -65,29 +18,6 @@ export interface PlanetProps2 extends PlanetProps {
 export type ParameterProps = {
   labels?: string[]
   values?: (string | undefined)[]
-}
-export interface SecondContainerHeroProps {
-  memberFound: Crew | undefined
-}
-export interface FirstContainerHeroProps extends SecondContainerHeroProps {
-  setMember: (arg0: string) => void
-  data: Crew[] | null
-}
-export interface FullCrewProps extends FirstContainerHeroProps {
-  deleteMember: (name: string | undefined) => void
-}
-export interface SecondContainerTechProps {
-  techFound: Technology | undefined
-}
-export interface ContainerTechPropsWithDelete extends SecondContainerTechProps {
-  deleteTech: (name: string | undefined) => void
-}
-export interface FirstContainerTechProps extends SecondContainerTechProps {
-  onSetTech: (arg0: string) => void
-  data: Technology[] | null
-}
-export interface FullTechProps extends FirstContainerTechProps {
-  deleteTech: (name: string | undefined) => void
 }
 export interface UploadInputProps {
   required: boolean
@@ -140,4 +70,9 @@ export interface DeleteParams<T> {
   setData: React.Dispatch<React.SetStateAction<T[]>>
   navigate: NavigateFunction
   basePath: string
+}
+export interface UserActionProps {
+  element: "planet" | "member" | "technology"
+  onDelete: (name: string | undefined) => void
+  name: string | undefined
 }
