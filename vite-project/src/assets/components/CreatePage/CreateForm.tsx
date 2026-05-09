@@ -38,7 +38,9 @@ export const CreateForm = ({
   const defaultState =
     initialStates[type as keyof typeof initialStates] ||
     initialStates.planet
-  const [formData, setFormData] = useState(defaultState)
+  const [formData, setFormData] = useState<
+    Destination | Crew | Technology
+  >(defaultState)
 
   useEffect(() => {
     setFormData(initialStates[type as keyof typeof initialStates])
@@ -52,10 +54,10 @@ export const CreateForm = ({
       [e.target.name]: e.target.value
     })
   }
-  
+
   const handleForm = (e: React.FormEvent) => {
     e.preventDefault()
-    
+
     let isValid = validateForm(
       formData,
       type,
