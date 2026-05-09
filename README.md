@@ -33,6 +33,12 @@ This project is built with TypeScript for logic and Tailwind CSS for styling. Si
 * **Manual Asset Management**: Due to the app being a client-side-only project (no backend/cloud storage), image uploads are currently handled manually. While the CRUD logic for adding new items is fully functional, users must place the image files in the /public/assets directory and reference them by path.
 * **The input upload challenge Challenge**: Implementing a real-time input type="file" that persists images in a local-only environment is a known browser security limitation
 
+# Core Concepts Applied: 
+* Used **useState** hook for UI interactions, **useEffect** for data synchronization, and **useParams** for obtaining the params from the URL.
+* **React Router v6**: Implemented dynamic routing with nested paths and protected the user experience with fallback "404" handling.
+* **State Persistence**: Managed complex state updates to ensure seamless CRUD operations without a backend.
+* **Conditional Rendering**: Built a dynamic UI that adapts content based on user-selected categories (Destinations, Crew, Tech).
+
 # Project status 
 * Status: **finished**
 * This project  **was deployed via Render and can be viewed live** using this link: https://multi-page-space-tourism-app-react-react.onrender.com/ 
