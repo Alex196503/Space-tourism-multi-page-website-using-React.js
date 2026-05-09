@@ -1,22 +1,4 @@
 import { Outlet } from "react-router-dom"
-// 1. Importurile pentru HOME
-import homeDesktop from "./assets/home/background-home-desktop.jpg"
-import homeTablet from "./assets/home/background-home-tablet.jpg"
-import homeMobile from "./assets/home/background-home-mobile.jpg"
-// Destination images imported
-import destDesktop from "./assets/destination/background-destination-desktop.jpg"
-import destTablet from "./assets/destination/background-destination-tablet.jpg"
-import destMobile from "./assets/destination/background-destination-mobile.jpg"
-
-//Crew images imported
-import crewDesktop from "./assets/crew/background-crew-desktop.jpg"
-import crewTablet from "./assets/crew/background-crew-tablet.jpg"
-import crewMobile from "./assets/crew/background-crew-mobile.jpg"
-
-//Technology images imported
-import techDesktop from "./assets/technology/background-technology-desktop.jpg"
-import techTablet from "./assets/technology/background-technology-tablet.jpg"
-import techMobile from "./assets/technology/background-technology-mobile.jpg"
 import { Header } from "../assets/components/HomePage/Header"
 import { useState } from "react"
 import { useLocation } from "react-router-dom"
@@ -28,19 +10,15 @@ export const MainLayout = () => {
   const getBgImage = () => {
     switch (location.pathname) {
       case "/":
-        return `bg-cover bg-no-repeat bg-center md:bg-[url(${homeTablet})] lg:bg-[url(${homeDesktop})] bg-[url(${homeMobile})]`
-
+        return "bg-cover bg-no-repeat bg-center md:bg-[url(/assets/home/background-home-tablet.jpg)] lg:bg-[url(/assets/home/background-home-desktop.jpg)] bg-[url(/assets/home/background-home-mobile.jpg)]"
       case "/destination":
-        return `bg-cover bg-no-repeat bg-center md:bg-[url(${destTablet})] lg:bg-[url(${destDesktop})] bg-[url(${destMobile})]`
-
+        return "bg-cover bg-no-repeat bg-center md:bg-[url(/assets/destination/background-destination-tablet.jpg)] lg:bg-[url(/assets/destination/background-destination-desktop.jpg)] bg-[url(/assets/destination/background-destination-mobile.jpg)]"
       case "/crew":
-        return `bg-cover bg-no-repeat bg-center md:bg-[url(${crewTablet})] lg:bg-[url(${crewDesktop})] bg-[url(${crewMobile})]`
-
+        return "bg-cover bg-no-repeat bg-center md:bg-[url(/assets/crew/background-crew-tablet.jpg)] lg:bg-[url(/assets/crew/background-crew-desktop.jpg)] bg-[url(/assets/crew/background-crew-mobile.jpg)]"
       case "/tech":
-        return `bg-cover bg-no-repeat bg-center md:bg-[url(${techTablet})] lg:bg-[url(${techDesktop})] bg-[url(${techMobile})]`
-
+        return "bg-cover bg-no-repeat bg-center md:bg-[url(/assets/technology/background-technology-tablet.jpg)] lg:bg-[url(/assets/technology/background-technology-desktop.jpg)] bg-[url(/assets/technology/background-technology-mobile.jpg)]"
       default:
-        return `lg:bg-[url(${homeDesktop})] bg-cover bg-no-repeat bg-center`
+        return "lg:bg-[url(./assets/home/background-home-desktop.jpg)]"
     }
   }
   return (
