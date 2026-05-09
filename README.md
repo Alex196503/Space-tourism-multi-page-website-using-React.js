@@ -7,6 +7,7 @@
 * All of these data are synced with LocalStorage, ensuring data persists across browser sessions.
 
 ### Preview: https://multi-page-space-tourism-app-react-react.onrender.com/
+![Image that shows the interface of the app](https://github.com/Alex196503/Multi-Page-Space-Tourism-App-React-React-Router-LocalStorage-CRUD/blob/0bec5883a2f6c4484cc3b6c4735eedc778b4c363/screenshot.png)
 
 # Technologies used : 
 | Category    | Technology |
