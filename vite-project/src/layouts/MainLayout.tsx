@@ -18,7 +18,7 @@ export const MainLayout = () => {
       case "/tech":
         return "bg-cover bg-no-repeat bg-center md:bg-[url(/assets/technology/background-technology-tablet.jpg)] lg:bg-[url(/assets/technology/background-technology-desktop.jpg)] bg-[url(/assets/technology/background-technology-mobile.jpg)]"
       default:
-        return "lg:bg-[url(./assets/home/background-home-desktop.jpg)]"
+        return "lg:bg-[url(/assets/home/background-home-desktop.jpg)]"
     }
   }
   return (
